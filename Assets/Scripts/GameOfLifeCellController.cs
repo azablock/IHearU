@@ -1,25 +1,25 @@
 ﻿using Models.CellularAutomata;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameOfLifeCellController : MonoBehaviour {
 
-  public CellularAutomataCell Cell;
+  [FormerlySerializedAs("Cell")]
+  public CellularAutomataCell cell;
 
-  public Material AliveMaterial;
+  [FormerlySerializedAs("AliveMaterial")]
+  public Material aliveMaterial;
 
-  public Material DeadMaterial;
-  
+  [FormerlySerializedAs("DeadMaterial")]
+  public Material deadMaterial;
+
   private MeshRenderer _meshRenderer;
-  
+
   private void Start() {
     _meshRenderer = GetComponent<MeshRenderer>();
   }
 
-  private void Update() {
-//    _meshRenderer.material = Cell.IsAlive ? AliveMaterial : DeadMaterial;
-  }
-
   public void UpdateState() {
-    _meshRenderer.material = Cell.IsAlive ? AliveMaterial : DeadMaterial;
+    _meshRenderer.material = cell.IsAlive ? aliveMaterial : deadMaterial;
   }
 }

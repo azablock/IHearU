@@ -21,7 +21,7 @@ public class GameOfLifeCellularAutomataController : MonoBehaviour {
 
     cells.ForEach(cell => {
       var cellController = Instantiate(GameOfLifeCellPrefab, new Vector3(cell.X, 0, cell.Y), Quaternion.identity).GetComponent<GameOfLifeCellController>();
-      cellController.Cell = cell;
+      cellController.cell = cell;
 
       _cellControllers.Add(cellController);
     });

@@ -4,9 +4,9 @@ using UnityEngine.Serialization;
 
 namespace Audio {
   
-  public class MidiSenderController2 : MonoBehaviour {
+  public class MidiSenderController : MonoBehaviour {
 
-    [FormerlySerializedAs("midiSender2")] [FormerlySerializedAs("MidiSender2")]
+    [FormerlySerializedAs("MidiSender")]
     public MidiSender midiSender = new MidiSender();
 
     private void Start() {

@@ -1,5 +1,5 @@
+using Models.Voice.Util;
 using NAudio.Midi;
-using UnityEngine;
 
 namespace Models.Voice {
 
@@ -9,14 +9,8 @@ namespace Models.Voice {
     private MidiOut _tenorMidiOut;
 
     public void Init() {
-      _bassMidiOut = new MidiOut(1);   // Device No for "loopMIDI Port" == 1
-      _tenorMidiOut = new MidiOut(2);  // Device No for "loopMIDI Port 1" == 2
-      
-      
-      
-      for (var device = 0; device < MidiOut.NumberOfDevices; device++) {
-        Debug.Log(MidiOut.DeviceInfo(device).ProductName);
-      }
+      _bassMidiOut = MidiDeviceFinder.MidiOutByDeviceName("loopMIDI Port");
+      _tenorMidiOut = MidiDeviceFinder.MidiOutByDeviceName("loopMIDI Port 1");
     }
 
     public void Send() {
