@@ -1,14 +1,30 @@
 ﻿namespace Models.Voice {
 
   public class Note {
-    //todo to be filled
-    public bool Alive;
 
     public readonly int MidiValue;
+    public readonly bool IsPause;
+    public readonly float Length;
+    public readonly float OffsetTime;
 
-    public Note(int midiValue) {
+    private Note(int midiValue, bool isPause, float length, float offsetTime) {
       MidiValue = midiValue;
-      Alive = false;
+      IsPause = isPause;
+      Length = length;
+      OffsetTime = offsetTime;
+    }
+
+    public static Note From(int midiValue, float length, float offsetTime) {
+      return new Note(midiValue, false, length, offsetTime);
+    }
+
+    public static Note Rhythmic(bool isPause, float length, float offsetTime) {
+      //todo midiValue = 0
+      return new Note(36, isPause, length, offsetTime);
+    }
+
+    public static Note Pause(int midiValue, float length, float offsetTime) {
+      return new Note(midiValue, true, length, offsetTime);
     }
   }
 }

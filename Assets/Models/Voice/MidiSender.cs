@@ -1,3 +1,4 @@
+using System;
 using Models.Voice.Util;
 using NAudio.Midi;
 
@@ -5,26 +6,23 @@ namespace Models.Voice {
 
   public class MidiSender {
 
-    private MidiOut _bassMidiOut;
-    private MidiOut _tenorMidiOut;
+    private readonly MidiOut _midiOut;
 
-    public void Init() {
-      _bassMidiOut = MidiDeviceFinder.MidiOutByDeviceName("loopMIDI Port");
-      _tenorMidiOut = MidiDeviceFinder.MidiOutByDeviceName("loopMIDI Port 1");
+    public MidiSender(string deviceName) {
+      _midiOut = MidiDeviceFinder.MidiOutByDeviceName(deviceName);
     }
-
-    public void Send() {
+    
+    public void Send(Note note) {
       //todo https://github.com/naudio/NAudio/blob/master/Docs/MidiInAndOut.md
-      _bassMidiOut.Send(new NoteEvent(5, 1, MidiCommandCode.NoteOn, 50, 64).GetAsShortMessage());
-      _bassMidiOut.Dispose();
+      var midiCommand = note.IsPause ? MidiCommandCode.NoteOff : MidiCommandCode.NoteOn;
+      var noteEvent = new NoteEvent(Convert.ToInt64(note.OffsetTime), 1, midiCommand, note.MidiValue, 64);
 
-      _tenorMidiOut.Send(new NoteEvent(1000, 1, MidiCommandCode.NoteOn, 58, 64).GetAsShortMessage());
-      _tenorMidiOut.Dispose();
+      _midiOut.Send(noteEvent.GetAsShortMessage());
     }
 
     public void Destroy() {
-      _bassMidiOut.Close();
-      _tenorMidiOut.Close();
+      _midiOut.Dispose();
+      _midiOut.Close();
     }
   }
 }

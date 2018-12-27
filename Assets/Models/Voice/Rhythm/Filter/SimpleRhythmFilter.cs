@@ -9,7 +9,7 @@ namespace Models.Voice {
     public IEnumerable<Note> Filter(GameOfLifeCellularAutomata automata, IEnumerable<Note> notes) {
       //todo example with automata
       return notes.Select((note, i) => {
-        note.Alive = i > 2;
+//        note.IsPause = i > 2; //todo
         return note;
       });
     }

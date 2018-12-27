@@ -2,7 +2,7 @@ using NAudio.Midi;
 
 namespace Models.Voice.Util {
 
-  public class MidiDeviceFinder {
+  public static class MidiDeviceFinder {
 
     public static MidiOut MidiOutByDeviceName(string name) {
       var midiOutDeviceNo = 0;
