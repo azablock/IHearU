@@ -1,6 +1,6 @@
 namespace Models.Voice.Harmony.Model {
   
-  public static class MusicInterval {
+  public class NoteInterval {
     
     public static int ROOT => 0;
     

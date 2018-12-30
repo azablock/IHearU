@@ -1,23 +1,17 @@
-using System.Collections.Generic;
-using Models.Voice;
-using Models.Voice.Rhythm.Util;
-using Models.Voice.Util;
+using System.Collections.Immutable;
+using Models.Voice.Harmony.Model;
 
 namespace Models.MarkovChain.MarkovChainFactory {
-
+  
   public class TwoNotesScaleMarkovChainFactory : IMarkovChainFactory<ScaleMarkovChain> {
-
+  
     public ScaleMarkovChain NewInstance() {
-      var noteD = Note.Of(NoteNameMapper.FromNoteSymbol("C"), RhythmHelper.SixteenthNoteLengthMillis(), 0.0f);
-      var noteFSharp = Note.Of(NoteNameMapper.FromNoteSymbol("G"), RhythmHelper.SixteenthNoteLengthMillis(), 0.0f);
-      var transitionDFsharp = new MarkovChainTransition<Note>(noteD, noteFSharp, 1.0f);
-      var transitionFsharpD = new MarkovChainTransition<Note>(noteFSharp, noteD, 1.0f);
-      
-      var noteVertices = new HashSet<Note> {noteD, noteFSharp};
+      var transitionDFsharp = new MarkovChainTransition<int>(NoteInterval.ROOT, NoteInterval.FIFTH, 1.0f);
+      var transitionFsharpD = new MarkovChainTransition<int>(NoteInterval.FIFTH, NoteInterval.ROOT, 1.0f);
 
-      var transitions = new HashSet<MarkovChainTransition<Note>> {transitionDFsharp, transitionFsharpD};
+      var transitions = ImmutableHashSet.Create(transitionDFsharp, transitionFsharpD);
 
-      return new ScaleMarkovChain(noteVertices, transitions);
+      return new ScaleMarkovChain(transitions);
     }
   }
 }

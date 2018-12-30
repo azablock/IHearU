@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Models.Voice.Rhythm.Model;
 using NAudio.Midi;
 
 namespace Models.Voice.Rhythm.Generator {
   
   public interface IRhythmGenerator<in T> {
-    IEnumerable<Note> Generate(T input);
+    List<RhythmData> Generate(T input);
   }
 }

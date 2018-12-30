@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
-using Models.Voice;
 
 namespace Models.MarkovChain {
 
-  public class ScaleMarkovChain : IMarkovChain<Note> {
-    private readonly HashSet<Note> _vertices;
-    private readonly HashSet<MarkovChainTransition<Note>> _transitions;
+  public class ScaleMarkovChain : IMarkovChain<int> {
+    
+    private readonly ImmutableHashSet<MarkovChainTransition<int>> _transitions;
 
-    public ScaleMarkovChain(HashSet<Note> vertices, HashSet<MarkovChainTransition<Note>> transitions) {
-      _vertices = vertices;
+    public ScaleMarkovChain(ImmutableHashSet<MarkovChainTransition<int>> transitions) {
       _transitions = transitions;
     }
 
-    public Note Decide(Note vertex) {
+    public int Decide(int vertex) {
       var decisionWeight = new Random().Next(0, 1);
       var transitionsExitingFrom = TransitionsExitingFrom(vertex).OrderBy(transition => transition.Probability);
       var matchedDecisionTransition = transitionsExitingFrom.First(transition => transition.Probability > decisionWeight);
@@ -22,20 +21,16 @@ namespace Models.MarkovChain {
       return matchedDecisionTransition.To;
     }
 
-    public HashSet<Note> Vertices() {
-      return _vertices;
-    }
-
-    public HashSet<MarkovChainTransition<Note>> Transitions() {
+    public IEnumerable<MarkovChainTransition<int>> Transitions() {
       return _transitions;
     }
 
-    public IEnumerable<MarkovChainTransition<Note>> TransitionsEnteringTo(Note vertex) {
-      return _transitions.Where(transition => transition.To.MidiValue == vertex.MidiValue);
+    public IEnumerable<MarkovChainTransition<int>> TransitionsEnteringTo(int vertex) {
+      return _transitions.Where(transition => transition.To == vertex);
     }
 
-    public IEnumerable<MarkovChainTransition<Note>> TransitionsExitingFrom(Note vertex) {
-      return _transitions.Where(transition => transition.From.MidiValue == vertex.MidiValue);
+    public IEnumerable<MarkovChainTransition<int>> TransitionsExitingFrom(int vertex) {
+      return _transitions.Where(transition => transition.From == vertex);
     }
   }
 }

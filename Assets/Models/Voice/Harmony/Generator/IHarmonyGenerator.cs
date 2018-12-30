@@ -1,5 +1,8 @@
-namespace Models.Voice.Harmony {
-  public interface IHarmonyGenerator {
-    
+using System.Collections.Generic;
+
+namespace Models.Voice.Harmony.Generator {
+
+  public interface IHarmonyGenerator<in T, out R> {
+    R Generate(T input);
   }
 }

@@ -1,13 +1,21 @@
 namespace Models.Voice.Harmony.Model {
 
-  public class OctaveId {
+  public class OctaveNoteRange {
 
-    public string Id { get; }
+    public OctaveNoteRangeId Id { get; }
     public int Offset { get; }
 
-    public OctaveId(string id, int offset) {
+    private const int SingleOctaveOffset = 12;
+    
+    private OctaveNoteRange(OctaveNoteRangeId id, int offset) {
       Id = id;
       Offset = offset;
     }
+
+    public static OctaveNoteRange C0_C1 => new OctaveNoteRange(OctaveNoteRangeId.C0_C1, SingleOctaveOffset * 2);
+  }
+
+  public enum OctaveNoteRangeId {
+    C0_C1
   }
 }

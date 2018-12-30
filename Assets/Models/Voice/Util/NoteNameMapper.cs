@@ -1,36 +1,24 @@
 using System.Collections.Generic;
 using System.Linq;
+using Models.Voice.Harmony.Model;
 
 namespace Models.Voice.Util {
 
   public static class NoteNameMapper {
 
-    private static readonly Dictionary<int, string> Notes = new Dictionary<int, string> {
-      {12, "C0"},
-      {13, "C#0"},
-      {14, "D0"},
-      {15, "D#0"},
-      {16, "E0"},
-      {17, "F0"},
-      {18, "F#0"},
-      {19, "G0"},
-      {20, "G#0"},
-      {21, "A0"},
-      {22, "A#0"},
-      {23, "B0"},
-      
-      {24, "C1"},
-      {25, "C#1"},
-      {26, "D1"},
-      {27, "D#1"},
-      {28, "E1"},
-      {29, "F1"},
-      {30, "F#1"},
-      {31, "G1"},
-      {32, "G#1"},
-      {33, "A1"},
-      {34, "A#1"},
-      {35, "B1"},
+    private static readonly Dictionary<int, string> Notes = new Dictionary<int, string> {    
+      {24, "C0"},
+      {25, "C#0"},
+      {26, "D0"},
+      {27, "D#0"},
+      {28, "E0"},
+      {29, "F0"},
+      {30, "F#0"},
+      {31, "G0"},
+      {32, "G#0"},
+      {33, "A0"},
+      {34, "A#0"},
+      {35, "B0"},
       
       {36, "C2"},
       {37, "C#2"},
@@ -50,13 +38,12 @@ namespace Models.Voice.Util {
       return Notes[value];
     }
     
-    //todo to refactor - different octaves
     public static int FromNoteName(string noteName) {
       return Notes.FirstOrDefault(note => note.Value == noteName).Key;
     }
 
-    public static int FromNoteSymbol(string noteSymbol) {
-      return Notes.FirstOrDefault(note => note.Value == $"{noteSymbol}0").Key;
+    public static int FromNoteSymbol(NoteSymbol noteSymbol) {
+      return Notes.FirstOrDefault(note => note.Value == $"{noteSymbol.ToString()}0").Key;
     }
   }
 }

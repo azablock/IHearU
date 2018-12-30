@@ -79,7 +79,7 @@ namespace Models.CellularAutomata {
 
     private CellularAutomataCell UpdatedCell(CellularAutomataCell cell) {
       var matchedRule = _rules.FirstOrDefault(rule => rule.Matches(cell));
-      var cellState = matchedRule != null ? matchedRule.State : cell.State;
+      var cellState = matchedRule?.State ?? cell.State;
 
       return new CellularAutomataCell(cell.Position, cellState);
     }
