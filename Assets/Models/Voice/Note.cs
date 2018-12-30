@@ -14,13 +14,17 @@
       OffsetTime = offsetTime;
     }
 
-    public static Note From(int midiValue, float length, float offsetTime) {
+    public static Note Of(int midiValue, float length, float offsetTime) {
       return new Note(midiValue, false, length, offsetTime);
+    }
+
+    public static Note WithMidiValue(Note origin, int midiValue) {
+      return new Note(midiValue, origin.IsPause, origin.Length, origin.OffsetTime);
     }
 
     public static Note Rhythmic(bool isPause, float length, float offsetTime) {
       //todo midiValue = 0
-      return new Note(36, isPause, length, offsetTime);
+      return new Note(24, isPause, length, offsetTime);
     }
 
     public static Note Pause(int midiValue, float length, float offsetTime) {

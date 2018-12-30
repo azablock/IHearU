@@ -2,7 +2,7 @@
 using System.Linq;
 using Models.CellularAutomata;
 
-namespace Models.Voice {
+namespace Models.Voice.Rhythm.Filter {
 
   public class SimpleRhythmFilter : IRhythmFilter<GameOfLifeCellularAutomata> {
 

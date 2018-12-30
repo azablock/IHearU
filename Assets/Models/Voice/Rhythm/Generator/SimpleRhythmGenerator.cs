@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Models.Voice.Rhythm.Util;
 using Models.Voice.Util;
 
 namespace Models.Voice.Rhythm.Generator {

@@ -1,8 +1,8 @@
-namespace Models.Voice.Util {
+namespace Models.Voice.Rhythm.Util {
 
-  public class RhythmHelper {
-
-    public const float Tempo = 80.0f; //80 4th notes in minute
+  public static class RhythmHelper {
+    
+    private const float Tempo = 80.0f; //80 4th notes in minute
 
     public static float FourthNoteLengthMillis() {
       return NoteLengthMillis(4.0f);

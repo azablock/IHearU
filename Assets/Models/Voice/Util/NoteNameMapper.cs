@@ -6,6 +6,19 @@ namespace Models.Voice.Util {
   public static class NoteNameMapper {
 
     private static readonly Dictionary<int, string> Notes = new Dictionary<int, string> {
+      {12, "C0"},
+      {13, "C#0"},
+      {14, "D0"},
+      {15, "D#0"},
+      {16, "E0"},
+      {17, "F0"},
+      {18, "F#0"},
+      {19, "G0"},
+      {20, "G#0"},
+      {21, "A0"},
+      {22, "A#0"},
+      {23, "B0"},
+      
       {24, "C1"},
       {25, "C#1"},
       {26, "D1"},
@@ -33,13 +46,17 @@ namespace Models.Voice.Util {
       {47, "B2"}
     };
     
-    public static string fromMidiValue(int value) {
+    public static string FromMidiValue(int value) {
       return Notes[value];
     }
     
     //todo to refactor - different octaves
     public static int FromNoteName(string noteName) {
-      return Notes.FirstOrDefault(name => name.Value == noteName).Key;
+      return Notes.FirstOrDefault(note => note.Value == noteName).Key;
+    }
+
+    public static int FromNoteSymbol(string noteSymbol) {
+      return Notes.FirstOrDefault(note => note.Value == $"{noteSymbol}0").Key;
     }
   }
 }
