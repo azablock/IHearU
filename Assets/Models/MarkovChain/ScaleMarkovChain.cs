@@ -1,7 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Models.Common;
+using Random = UnityEngine.Random;
 
 namespace Models.MarkovChain {
 
@@ -13,12 +14,13 @@ namespace Models.MarkovChain {
       _transitions = transitions;
     }
 
+    //todo remove Unity method usage
     public int Decide(int vertex) {
-      var decisionWeight = new Random().Next(0, 1);
-      var transitionsExitingFrom = TransitionsExitingFrom(vertex).OrderBy(transition => transition.Probability);
-      var matchedDecisionTransition = transitionsExitingFrom.First(transition => transition.Probability > decisionWeight);
+      var decisionWeight = Random.Range(0.0f, 1.0f);
+      var ranges = ProbabilityRangesExitingFrom(vertex);
+      var matchedTransition = ranges.First(range => range.Key.ContainsValue(decisionWeight)).Value;
 
-      return matchedDecisionTransition.To;
+      return matchedTransition.To;
     }
 
     public IEnumerable<MarkovChainTransition<int>> Transitions() {
@@ -31,6 +33,16 @@ namespace Models.MarkovChain {
 
     public IEnumerable<MarkovChainTransition<int>> TransitionsExitingFrom(int vertex) {
       return _transitions.Where(transition => transition.From == vertex);
+    }
+
+    public ImmutableDictionary<Range<float>, MarkovChainTransition<int>> ProbabilityRangesExitingFrom(int vertex) {
+      var transitions = TransitionsExitingFrom(vertex);
+      var probabilityOffset = 0.0f;
+
+      return transitions.Aggregate(
+        ImmutableDictionary.Create<Range<float>, MarkovChainTransition<int>>(),
+        (ranges, transition) => ranges.Add(Range<float>.Of(probabilityOffset, probabilityOffset += transition.Probability), transition)
+      );
     }
   }
 }

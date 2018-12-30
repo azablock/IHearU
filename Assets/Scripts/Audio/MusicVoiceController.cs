@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Models.MarkovChain.MarkovChainFactory;
 using Models.Voice;
 using Models.Voice.Harmony.Generator;
@@ -28,7 +29,7 @@ namespace Audio {
       _midiSender.Destroy();
     }
 
-    private void PlayNote() {
+    private Task PlayNote() {
       if (_voice.IsEmpty) {
         _voice.AddMusicPhrase(GeneratedPhrase());
         var str = "";
@@ -36,9 +37,9 @@ namespace Audio {
         Debug.Log(str);
       }
 
-      _midiSender.Send(_voice.NextNote());
+      return _midiSender.PlayNoteAsync(_voice.NextNote());
     }
-//
+    
     private IEnumerable<Note> GeneratedPhrase() {
       var gameOfLifeController = _gameOfLifeManager.GetComponent<GameOfLifeCellularAutomataController>();
       gameOfLifeController.UpdateCellularAutomata();

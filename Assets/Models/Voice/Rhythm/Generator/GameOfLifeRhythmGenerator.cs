@@ -15,7 +15,8 @@ namespace Models.Voice.Rhythm.Generator {
       }
 
       return rows
-        .Last(row => row.Count(cell => cell.IsAlive) != 0)
+        .OrderBy(row => row.Count(cell => cell.IsAlive))
+        .Last()
         .Select(cell => RhythmData.SixteenthNote(cell.IsDead))
         .ToList();
     }

@@ -6,10 +6,12 @@ namespace Models.MarkovChain.MarkovChainFactory {
   public class TwoNotesScaleMarkovChainFactory : IMarkovChainFactory<ScaleMarkovChain> {
   
     public ScaleMarkovChain NewInstance() {
-      var transitionDFsharp = new MarkovChainTransition<int>(NoteInterval.ROOT, NoteInterval.FIFTH, 1.0f);
-      var transitionFsharpD = new MarkovChainTransition<int>(NoteInterval.FIFTH, NoteInterval.ROOT, 1.0f);
+      var transRootFifth = new MarkovChainTransition<int>(NoteInterval.ROOT, NoteInterval.MIN_3RD, 0.1f);
+      var transRootFajnieJest = new MarkovChainTransition<int>(NoteInterval.ROOT, NoteInterval.MIN_6TH, 0.15f);
+      var transRootRoot = new MarkovChainTransition<int>(NoteInterval.ROOT, NoteInterval.ROOT, 0.75f);
+      var transFifthRoot = new MarkovChainTransition<int>(NoteInterval.MIN_3RD, NoteInterval.ROOT, 1.0f);
 
-      var transitions = ImmutableHashSet.Create(transitionDFsharp, transitionFsharpD);
+      var transitions = ImmutableHashSet.Create(transRootFifth, transRootRoot, transFifthRoot, transRootFajnieJest);
 
       return new ScaleMarkovChain(transitions);
     }

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 namespace Models.CellularAutomata {
 
@@ -50,6 +52,15 @@ namespace Models.CellularAutomata {
 
     public void Update() {
       var newState = _state.Select(pair => UpdatedCell(pair.Value)).ToList();
+
+      foreach (var cell in newState) {
+        _state[cell.Position].State = cell.State;
+      }
+    }
+
+    //todo remove Unity method usage
+    public void DistributeRandomly() {
+      var newState = _state.Select(pair => new CellularAutomataCell(pair.Key, Random.Range(0.0f, 1.0f) > 0.3 ? GameOfLifeCellState.Alive : GameOfLifeCellState.Dead));
 
       foreach (var cell in newState) {
         _state[cell.Position].State = cell.State;
