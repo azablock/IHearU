@@ -1,4 +1,4 @@
-namespace Models.Voice.Harmony.Generator {
+namespace Models.Voice.Harmony.Generator.Model {
 
   public class MarkovChainHarmonyGenerationEvent {
 

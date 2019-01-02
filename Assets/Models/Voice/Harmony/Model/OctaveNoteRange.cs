@@ -1,5 +1,8 @@
+using System;
+
 namespace Models.Voice.Harmony.Model {
 
+  [Serializable]
   public class OctaveNoteRange {
 
     public OctaveNoteRangeId Id { get; }

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Models.Voice.Harmony.Generator {
 
   public interface IHarmonyGenerator<in T, out R> {

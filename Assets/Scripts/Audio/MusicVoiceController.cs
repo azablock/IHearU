@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models.MarkovChain.MarkovChainFactory;
+using Models.CellularAutomata;
 using Models.Voice;
-using Models.Voice.Harmony.Generator;
 using Models.Voice.Harmony.Model;
-using Models.Voice.Rhythm.Generator;
 using Models.Voice.Rhythm.Model;
+using Scriptable_Objects_Definitions.Voice.Harmony;
+using Scriptable_Objects_Definitions.Voice.Rhythm;
 using UnityEngine;
 
 namespace Audio {
@@ -14,13 +14,15 @@ namespace Audio {
     
     public string deviceName;
 
+    public RhythmProvider rhythmProvider;
+    public HarmonyProvider harmonyProvider;
+    
+    private GameOfLifeCellularAutomataHolder _gameOfLifeHolder;
     private MidiSender _midiSender;
-    private GameObject _gameOfLifeManager;
-    private MusicVoice _voice = new MusicVoice(OctaveNoteRange.C0_C1);
 
     private void Start() {
-      _gameOfLifeManager = GameObject.FindWithTag("GameOfLifeManager");
       _midiSender = new MidiSender(deviceName);
+      _gameOfLifeHolder = GetComponent<GameOfLifeCellularAutomataHolder>();
 
       InvokeRepeating(nameof(PlayNote), 1.0f, 0.254f); //118 BPM -> 0.127 s == 16th length, 0.254f == 8th length
     }
@@ -29,34 +31,33 @@ namespace Audio {
       _midiSender.Destroy();
     }
 
+    public GameOfLifeCellularAutomata GameOfLifeCellularAutomata => _gameOfLifeHolder.Automata;
+
+    public MusicVoice Voice { get; } = new MusicVoice(OctaveNoteRange.C0_C1);
+
     private Task PlayNote() {
-      if (_voice.PhraseAlreadyPlayed) {
-        _voice.AddMusicPhrase(GeneratedPhrase());
-        var str = "";
-        _voice.MusicPhrase.ForEach(note => str += note.IsPause ? "0" : "1");
-        Debug.Log(str);
+      if (Voice.PhraseAlreadyPlayed) {
+        Voice.AddMusicPhrase(GeneratedPhrase());
       }
 
-      return _midiSender.PlayNoteAsync(_voice.NextNote());
+      return _midiSender.PlayNoteAsync(Voice.NextNote());
     }
     
+    //todo to refactor
     private IEnumerable<Note> GeneratedPhrase() {
-      var gameOfLifeController = _gameOfLifeManager.GetComponent<GameOfLifeCellularAutomataController>();
-      gameOfLifeController.UpdateCellularAutomata();
+      _gameOfLifeHolder.UpdateCellularAutomata();
 
-      var harmonyGenerator = new MarkovChainHarmonyGenerator(new TwoNotesScaleMarkovChainFactory().NewInstance());
-      var rhythmPattern = new GameOfLifeRhythmGenerator().Generate(gameOfLifeController.Automata);
+      Voice.RhythmPattern = rhythmProvider.Provide(this);
+      Voice.HarmonyPattern = harmonyProvider.Provide(this);
 
-      var harmonyGenerationEvent = MarkovChainHarmonyGenerationEvent.Of(_voice, rhythmPattern.Count(rhythmData => !rhythmData.IsPause));
-      var harmony = harmonyGenerator.Generate(harmonyGenerationEvent);
-
-      return rhythmPattern.Select(rhythmData => NoteFrom(rhythmData, harmony));
+      return Voice.RhythmPattern.Select(rhythmData => NoteFrom(rhythmData, Voice.HarmonyPattern));
     }
 
+    //todo to be moved (or deleted?)
     private Note NoteFrom(RhythmData rhythmData, Queue<int> harmony) {
       return rhythmData.IsPause
         ? Note.Pause(0.254f, 0.0f)                                                 //todo
-        : Note.Of(harmony.Dequeue() + _voice.NoteRange.Offset, 0.254f, 0.0f);  //todo
+        : Note.Of(harmony.Dequeue() + Voice.NoteRange.Offset, 0.254f, 0.0f);  //todo
     }
   }
 }

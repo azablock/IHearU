@@ -11,6 +11,9 @@ namespace Models.Voice {
     public OctaveNoteRange NoteRange { get; }
     public readonly MusicKey MusicKey;
 
+    public List<RhythmData> RhythmPattern;
+    public Queue<int> HarmonyPattern;
+
     public MusicVoice(OctaveNoteRange noteRange) {
       NoteRange = noteRange;
       MusicKey = MusicKey.Of(NoteSymbol.C);

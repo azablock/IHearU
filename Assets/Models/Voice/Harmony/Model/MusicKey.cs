@@ -38,16 +38,5 @@ namespace Models.Voice.Harmony.Model {
     public static MusicKey Of(NoteSymbol keyRoot) {
       return MusicKeys.Find(key => key.KeyRoot == keyRoot);
     }
-
-    public static int IntervalBy(int sourceMidiValue, int targetMidiValue) {
-      return Math.Abs(targetMidiValue - sourceMidiValue);
-    }
-
-    public static int IntervalBy(string sourceNoteName, string targetNoteName) {
-      var sourceMidiValue = NoteNameMapper.FromNoteName(sourceNoteName);
-      var targetMidiValue = NoteNameMapper.FromNoteName(targetNoteName);
-
-      return IntervalBy(sourceMidiValue, targetMidiValue);
-    }
   }
 }

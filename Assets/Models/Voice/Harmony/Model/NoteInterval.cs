@@ -1,3 +1,6 @@
+using System;
+using Models.Voice.Util;
+
 namespace Models.Voice.Harmony.Model {
   
   public class NoteInterval {
@@ -27,5 +30,16 @@ namespace Models.Voice.Harmony.Model {
     public static int MAJ_7TH => 11;
 
     public static int OCTAVE => 12;
+    
+    public static int IntervalBy(int sourceMidiValue, int targetMidiValue) {
+      return Math.Abs(targetMidiValue - sourceMidiValue);
+    }
+
+    public static int IntervalBy(string sourceNoteName, string targetNoteName) {
+      var sourceMidiValue = NoteNameMapper.FromNoteName(sourceNoteName);
+      var targetMidiValue = NoteNameMapper.FromNoteName(targetNoteName);
+
+      return IntervalBy(sourceMidiValue, targetMidiValue);
+    }
   }
 }

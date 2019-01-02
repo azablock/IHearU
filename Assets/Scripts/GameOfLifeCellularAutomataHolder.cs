@@ -2,7 +2,7 @@
 using Models.CellularAutomata;
 using UnityEngine;
 
-public class GameOfLifeCellularAutomataController : MonoBehaviour {
+public class GameOfLifeCellularAutomataHolder : MonoBehaviour {
 
   public int SizeX;
 
