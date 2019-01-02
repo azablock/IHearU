@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Models.Common;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Models.MarkovChain {
@@ -18,7 +19,8 @@ namespace Models.MarkovChain {
     public int Decide(int vertex) {
       var decisionWeight = Random.Range(0.0f, 1.0f);
       var ranges = ProbabilityRangesExitingFrom(vertex);
-      var matchedTransition = ranges.First(range => range.Key.ContainsValue(decisionWeight)).Value;
+      var firstOrDefault = ranges.FirstOrDefault(range => range.Key.ContainsValue(decisionWeight));
+      var matchedTransition = firstOrDefault.Value;
 
       return matchedTransition.To;
     }

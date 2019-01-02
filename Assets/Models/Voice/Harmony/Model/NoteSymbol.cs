@@ -1,5 +1,3 @@
-using System;
-
 namespace Models.Voice.Harmony.Model {
   public enum NoteSymbol {
     C,
@@ -8,7 +6,7 @@ namespace Models.Voice.Harmony.Model {
     Eb,
     E,
     F,
-    Gg,
+    Gb,
     G,
     Ab,
     A,

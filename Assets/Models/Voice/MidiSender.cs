@@ -22,6 +22,7 @@ namespace Models.Voice {
 //    }
     
     public async Task PlayNoteAsync(Note note) {
+      //todo velocity randomness to be used in specific filter
       var velocity = 50 + new Random().Next(0, 20);
 
       _midiOut.Send(MidiMessage.StartNote(note.MidiValue, velocity, 1).RawData);

@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Models.Voice.Harmony.Model;
+using Models.Voice.Rhythm.Model;
 
 namespace Models.Voice {
   
   public class MusicVoice {
   
     public List<Note> MusicPhrase { get; } = new List<Note>();
-    public OctaveNoteRange Range { get; }
+    public OctaveNoteRange NoteRange { get; }
+    public readonly MusicKey MusicKey;
 
-    public MusicVoice(OctaveNoteRange range) {
-      Range = range;
+    public MusicVoice(OctaveNoteRange noteRange) {
+      NoteRange = noteRange;
+      MusicKey = MusicKey.Of(NoteSymbol.C);
     }
 
     public void AddMusicPhrase(IEnumerable<Note> phrase) {
@@ -25,6 +28,10 @@ namespace Models.Voice {
       return note;
     }
 
-    public bool IsEmpty => MusicPhrase.All(note => note.AlreadyPlayed);
+    public bool PhraseAlreadyPlayed => MusicPhrase.All(note => note.AlreadyPlayed);
+
+    public bool IsEmpty => MusicPhrase.Count == 0;
+
+    public int KeyRootMidiValue => NoteRange.Offset + MusicKey.MidiOffset;
   }
 }

@@ -30,7 +30,7 @@ namespace Audio {
     }
 
     private Task PlayNote() {
-      if (_voice.IsEmpty) {
+      if (_voice.PhraseAlreadyPlayed) {
         _voice.AddMusicPhrase(GeneratedPhrase());
         var str = "";
         _voice.MusicPhrase.ForEach(note => str += note.IsPause ? "0" : "1");
@@ -43,10 +43,12 @@ namespace Audio {
     private IEnumerable<Note> GeneratedPhrase() {
       var gameOfLifeController = _gameOfLifeManager.GetComponent<GameOfLifeCellularAutomataController>();
       gameOfLifeController.UpdateCellularAutomata();
-      var harmonyGenerator = new MarkovChainHarmonyGenerator(new TwoNotesScaleMarkovChainFactory().NewInstance());
 
+      var harmonyGenerator = new MarkovChainHarmonyGenerator(new TwoNotesScaleMarkovChainFactory().NewInstance());
       var rhythmPattern = new GameOfLifeRhythmGenerator().Generate(gameOfLifeController.Automata);
-      var harmony = harmonyGenerator.Generate(rhythmPattern.Count(rhythmData => !rhythmData.IsPause));
+
+      var harmonyGenerationEvent = MarkovChainHarmonyGenerationEvent.Of(_voice, rhythmPattern.Count(rhythmData => !rhythmData.IsPause));
+      var harmony = harmonyGenerator.Generate(harmonyGenerationEvent);
 
       return rhythmPattern.Select(rhythmData => NoteFrom(rhythmData, harmony));
     }
@@ -54,7 +56,7 @@ namespace Audio {
     private Note NoteFrom(RhythmData rhythmData, Queue<int> harmony) {
       return rhythmData.IsPause
         ? Note.Pause(0.254f, 0.0f)                                                 //todo
-        : Note.Of(harmony.Dequeue() + _voice.Range.Offset, 0.254f, 0.0f);  //todo
+        : Note.Of(harmony.Dequeue() + _voice.NoteRange.Offset, 0.254f, 0.0f);  //todo
     }
   }
 }

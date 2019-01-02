@@ -25,5 +25,7 @@ namespace Models.Voice.Harmony.Model {
     public static int MIN_7TH => 10;
 
     public static int MAJ_7TH => 11;
+
+    public static int OCTAVE => 12;
   }
 }
