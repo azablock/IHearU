@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Models.Voice.Util;
 using NAudio.Midi;
@@ -22,12 +21,9 @@ namespace Models.Voice {
 //    }
     
     public async Task PlayNoteAsync(Note note) {
-      //todo velocity randomness to be used in specific filter
-      var velocity = 50 + new Random().Next(0, 20);
-
-      _midiOut.Send(MidiMessage.StartNote(note.MidiValue, velocity, 1).RawData);
+      _midiOut.Send(MidiMessage.StartNote(note.MidiValue, note.Velocity, 1).RawData);
       await Task.Delay(254).ConfigureAwait(false);
-      _midiOut.Send(MidiMessage.StopNote(note.MidiValue, velocity, 1).RawData);
+      _midiOut.Send(MidiMessage.StopNote(note.MidiValue, note.Velocity, 1).RawData);
     }
 
     public void Destroy() {

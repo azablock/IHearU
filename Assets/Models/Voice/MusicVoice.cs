@@ -19,12 +19,20 @@ namespace Models.Voice {
       MusicKey = MusicKey.Of(NoteSymbol.C);
     }
 
-    public void AddMusicPhrase(IEnumerable<Note> phrase) {
+    public MusicVoice AddMusicPhrase(IEnumerable<Note> phrase) {
       MusicPhrase.Clear();
       MusicPhrase.AddRange(phrase);
+
+      return this;
     }
 
-    public Note NextNote() {
+    public void UpdateNextNote(Note newNote) {
+      MusicPhrase[NextNoteIndex] = newNote;
+    }
+
+    public Note NextNote => MusicPhrase.First(n => !n.AlreadyPlayed);
+
+    public Note UseNextNote() {
       var note = MusicPhrase.First(n => !n.AlreadyPlayed);
       note.AlreadyPlayed = true;
 
@@ -36,5 +44,7 @@ namespace Models.Voice {
     public bool IsEmpty => MusicPhrase.Count == 0;
 
     public int KeyRootMidiValue => NoteRange.Offset + MusicKey.MidiOffset;
+
+    private int NextNoteIndex => MusicPhrase.FindIndex(n => !n.AlreadyPlayed);
   }
 }

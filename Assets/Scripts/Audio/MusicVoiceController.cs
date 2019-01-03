@@ -5,6 +5,7 @@ using Models.CellularAutomata;
 using Models.Voice;
 using Models.Voice.Harmony.Model;
 using Models.Voice.Rhythm.Model;
+using Scriptable_Objects_Definitions.Voice;
 using Scriptable_Objects_Definitions.Voice.Harmony;
 using Scriptable_Objects_Definitions.Voice.Rhythm;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Audio {
   public class MusicVoiceController : MonoBehaviour {
     
     public string deviceName;
+    public MusicVoiceFilter[] musicVoiceFilters;
 
     public RhythmProvider rhythmProvider;
     public HarmonyProvider harmonyProvider;
@@ -40,7 +42,9 @@ namespace Audio {
         Voice.AddMusicPhrase(GeneratedPhrase());
       }
 
-      return _midiSender.PlayNoteAsync(Voice.NextNote());
+      musicVoiceFilters.ToList().ForEach(filter => filter.Filter(this));
+
+      return _midiSender.PlayNoteAsync(Voice.UseNextNote());
     }
     
     //todo to refactor
