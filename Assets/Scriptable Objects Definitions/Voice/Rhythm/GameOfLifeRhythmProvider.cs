@@ -15,7 +15,7 @@ namespace Scriptable_Objects_Definitions.Voice.Rhythm {
     }
 
     public override List<RhythmData> Provide(MusicVoiceController voiceController) {
-      return _generator.Generate(voiceController.GameOfLifeCellularAutomata);
+      return _generator.Generate(voiceController);
     }
   }
 }

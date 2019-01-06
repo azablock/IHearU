@@ -289,6 +289,93 @@ Transform:
   m_Father: {fileID: 1647516766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &331701188
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 493059810, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_Name
+      value: TenorVoiceController
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.8342354
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.6523104
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.0100875
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: musicVoiceFilters.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: harmonyProvider
+      value: 
+      objectReference: {fileID: 11400000, guid: bbbe4e75fe0432a4c9b46c3bb777b1cc,
+        type: 2}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: rhythmProvider
+      value: 
+      objectReference: {fileID: 11400000, guid: b7fa9158062c28342a7539db6201f2ca,
+        type: 2}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: deviceName
+      value: loopMIDI Tenor Voice Port
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: musicVoiceFilters.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059811, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: SizeX
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059811, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: SizeY
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
 --- !u!1001 &410653922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -560,7 +647,7 @@ GameObject:
   - component: {fileID: 990483963}
   - component: {fileID: 990483964}
   m_Layer: 0
-  m_Name: Moon Light
+  m_Name: Sun Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -793,6 +880,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BassVoiceController
       objectReference: {fileID: 0}
+    - target: {fileID: 493059810, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8342354
@@ -836,6 +927,10 @@ PrefabInstance:
     - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: deviceName
+      value: loopMIDI Bass Voice Port
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
@@ -919,6 +1014,97 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1411453601}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1434120072
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 493059810, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_Name
+      value: AltVoiceController
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059810, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.8342354
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.6523104
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.0100875
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059813, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: musicVoiceFilters.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: deviceName
+      value: loopMIDI Alt Voice Port
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: harmonyProvider
+      value: 
+      objectReference: {fileID: 11400000, guid: b6ad3da2ce8a6674aa2e226cd625764b,
+        type: 2}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: rhythmProvider
+      value: 
+      objectReference: {fileID: 11400000, guid: d092d16da04eb894cbe1d78eddad839e,
+        type: 2}
+    - target: {fileID: 493059812, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: musicVoiceFilters.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059811, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: SizeX
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 493059811, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
+      propertyPath: SizeY
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a95e503d218d5142b353377ad3b8526, type: 3}
 --- !u!1 &1647516763
 GameObject:
   m_ObjectHideFlags: 0

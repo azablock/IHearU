@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a2a1b49742e42b7bd4556439d70e3cd, type: 3}
-  m_Name: Markov Chain Harmony Provider
+  m_Script: {fileID: 11500000, guid: 5d07777e658d48b495d38c2eea5a262c, type: 3}
+  m_Name: Bass Game Of Life Rhythm Provider
   m_EditorClassIdentifier: 
+  measure: 4

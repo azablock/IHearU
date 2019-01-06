@@ -8,22 +8,24 @@ namespace Models.Voice {
 
     private readonly MidiOut _midiOut;
 
+    private const float StopNoteMillisDelta = 10.0f;
+
     public MidiSender(string deviceName) {
       _midiOut = MidiDeviceFinder.MidiOutByDeviceName(deviceName);
     }
     
-//    public void Send(Note note) {
-//      var midiCommand = note.IsPause ? MidiCommandCode.NoteOff : MidiCommandCode.NoteOn;
-//      var velocity = 50 + new Random().Next(0, 10);
-//      var noteEvent = new NoteEvent(Convert.ToInt64(note.OffsetTime), 1, midiCommand, note.MidiValue, velocity);
-//
-//      _midiOut.Send(noteEvent.GetAsShortMessage());
-//    }
-    
     public async Task PlayNoteAsync(Note note) {
-      _midiOut.Send(MidiMessage.StartNote(note.MidiValue, note.Velocity, 1).RawData);
-      await Task.Delay(254).ConfigureAwait(false);
-      _midiOut.Send(MidiMessage.StopNote(note.MidiValue, note.Velocity, 1).RawData);
+      if (note.IsPause) {
+        await Task.Delay((int) note.Length).ConfigureAwait(false);
+      }
+      else {
+        var startNoteTimeMillis = note.Length - StopNoteMillisDelta;
+        _midiOut.Send(MidiMessage.StartNote(note.MidiValue, note.Velocity, 1).RawData);
+        await Task.Delay((int) startNoteTimeMillis).ConfigureAwait(false);
+
+        _midiOut.Send(MidiMessage.StopNote(note.MidiValue, note.Velocity, 1).RawData);
+        await Task.Delay((int) StopNoteMillisDelta).ConfigureAwait(false);
+      }
     }
 
     public void Destroy() {

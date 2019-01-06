@@ -40,13 +40,13 @@ namespace Models.CellularAutomata {
       };
 
       ///////////////////////
-      _state[new Vector2D(1, 6)].State = GameOfLifeCellState.Alive;
-      
-      _state[new Vector2D(2, 5)].State = GameOfLifeCellState.Alive;
-      _state[new Vector2D(3, 5)].State = GameOfLifeCellState.Alive;
-
-      _state[new Vector2D(1, 4)].State = GameOfLifeCellState.Alive;
-      _state[new Vector2D(2, 4)].State = GameOfLifeCellState.Alive;
+//      _state[new Vector2D(1, 6)].State = GameOfLifeCellState.Alive;
+//      
+//      _state[new Vector2D(2, 5)].State = GameOfLifeCellState.Alive;
+//      _state[new Vector2D(3, 5)].State = GameOfLifeCellState.Alive;
+//
+//      _state[new Vector2D(1, 4)].State = GameOfLifeCellState.Alive;
+//      _state[new Vector2D(2, 4)].State = GameOfLifeCellState.Alive;
       ///////////////////////
     }
 

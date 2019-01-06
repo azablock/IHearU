@@ -1,3 +1,5 @@
+using Models.Voice.Rhythm.Util;
+
 namespace Models.Voice.Rhythm.Model {
 
   public class RhythmData {
@@ -8,19 +10,25 @@ namespace Models.Voice.Rhythm.Model {
     }
 
     public static RhythmData QuarterNote(bool isPause) {
-      return new RhythmData(isPause, RhythmMeasure.QUARTER_NOTE);
+      return new RhythmData(isPause, RhythmMeasure.QuarterNote);
     }
     
     public static RhythmData EighthNote(bool isPause) {
-      return new RhythmData(isPause, RhythmMeasure.EIGHT_NOTE);
+      return new RhythmData(isPause, RhythmMeasure.EightNote);
     }
 
     public static RhythmData SixteenthNote(bool isPause) {
-      return new RhythmData(isPause, RhythmMeasure.SIXTEENTH_NOTE);
+      return new RhythmData(isPause, RhythmMeasure.SixteenthNote);
+    }
+
+    public static RhythmData Of(bool isPause, RhythmMeasure measure) {
+      return new RhythmData(isPause, measure);
     }
 
     public bool IsPause { get; }
 
-    public RhythmMeasure Measure { get; }
+    public float LengthMillis => Metronome.LengthMillisByMeasure(Measure);
+
+    private RhythmMeasure Measure { get; }
   }
 }

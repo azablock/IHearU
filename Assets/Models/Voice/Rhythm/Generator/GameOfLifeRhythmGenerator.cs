@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using Audio;
 using Models.CellularAutomata;
 using Models.Voice.Rhythm.Model;
 
 namespace Models.Voice.Rhythm.Generator {
 
-  public class GameOfLifeRhythmGenerator : IRhythmGenerator<GameOfLifeCellularAutomata> {
+  public class GameOfLifeRhythmGenerator : IRhythmGenerator<MusicVoiceController> {
 
-    public List<RhythmData> Generate(GameOfLifeCellularAutomata automata) {
+    public List<RhythmData> Generate(MusicVoiceController voiceController) {
       var rows = new List<List<CellularAutomataCell>>();
+      var automata = voiceController.GameOfLifeCellularAutomata;
 
       for (var y = 0; y < automata.Dimensions().Y; y++) {
         rows.Add(GameOfLifeRow(automata, y));
@@ -17,7 +19,7 @@ namespace Models.Voice.Rhythm.Generator {
       return rows
         .OrderBy(row => row.Count(cell => cell.IsAlive))
         .Last()
-        .Select(cell => RhythmData.SixteenthNote(cell.IsDead))
+        .Select(cell => RhythmData.Of(cell.IsDead, voiceController.rhythmProvider.measure))
         .ToList();
     }
 
