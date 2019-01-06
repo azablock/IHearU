@@ -36,7 +36,6 @@ namespace Scriptable_Objects_Definitions.Voice.Dynamics {
     private Note WithUpdatedVelocity(Note note, float distance) {
       var newVelocity = (1.0f - distance / maxDistance) * maxVelocityIncrease;
       note.Velocity += (int) newVelocity;
-      Debug.Log($"{note.Velocity} {Time.deltaTime}");
 
       return note;
     }

@@ -3,6 +3,7 @@ using System.Linq;
 using Models.MarkovChain;
 using Models.Voice.Harmony.Generator.Model;
 using Models.Voice.Harmony.Model;
+using Models.Voice.Rhythm.Model;
 
 namespace Models.Voice.Harmony.Generator {
   
@@ -19,8 +20,8 @@ namespace Models.Voice.Harmony.Generator {
       var currentInterval = SourceHarmonyInterval(voice);
       var noteCount = voice.RhythmPattern.Count(rhythmData => !rhythmData.IsPause);
 
-      for (var i = 0; i < noteCount; i++) {
-        var nextInterval = _markovChain.Decide(currentInterval);
+      foreach (var rhythmData in voice.RhythmPattern) {
+        var nextInterval = rhythmData.IsPause ? 0 : _markovChain.Decide(currentInterval);
         currentInterval = nextInterval;
         intervals.Add(currentInterval);
       }

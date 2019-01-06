@@ -4,14 +4,13 @@ using Models.Voice.Harmony.Model;
 using Models.Voice.Rhythm.Model;
 
 namespace Models.Voice {
-  
   public class MusicVoice {
-  
     public List<Note> MusicPhrase { get; } = new List<Note>();
     public OctaveNoteRange NoteRange { get; }
     public readonly MusicKey MusicKey;
 
     public List<RhythmData> RhythmPattern;
+    public Queue<int> DynamicsPattern;
     public Queue<int> HarmonyPattern;
 
     public MusicVoice(OctaveNoteRange noteRange) {
@@ -19,13 +18,19 @@ namespace Models.Voice {
       MusicKey = MusicKey.Of(NoteSymbol.C);
     }
 
-    public MusicVoice AddMusicPhrase(IEnumerable<Note> phrase) {
+    public MusicVoice AddMusicPhrase() {
+      var newMusicPhrase = RhythmPattern.Select((rhythmData, iterator) => NoteFrom(
+        rhythmData,
+        DynamicsPattern.ElementAt(iterator), 
+        HarmonyPattern.ElementAt(iterator))
+      );
+
       MusicPhrase.Clear();
-      MusicPhrase.AddRange(phrase);
+      MusicPhrase.AddRange(newMusicPhrase);
 
       return this;
     }
-
+    
     public void UpdateNextNote(Note newNote) {
       MusicPhrase[NextNoteIndex] = newNote;
     }
@@ -46,5 +51,16 @@ namespace Models.Voice {
     public int KeyRootMidiValue => NoteRange.Offset + MusicKey.MidiOffset;
 
     private int NextNoteIndex => MusicPhrase.FindIndex(n => !n.AlreadyPlayed);
+    
+    private Note NoteFrom(RhythmData rhythmData, int velocity, int interval) {
+      return rhythmData.IsPause
+        ? Note.Pause(rhythmData.LengthMillis, 0.0f)
+        : Note.Of(
+          interval + NoteRange.Offset,
+          rhythmData.LengthMillis,
+          velocity,
+          0.0f
+        );
+    }
   }
 }

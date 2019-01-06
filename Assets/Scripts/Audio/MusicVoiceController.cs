@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Models.CellularAutomata;
 using Models.Voice;
 using Models.Voice.Harmony.Model;
-using Models.Voice.Rhythm.Model;
 using Models.Voice.Rhythm.Util;
 using Scriptable_Objects_Definitions.Voice;
+using Scriptable_Objects_Definitions.Voice.Dynamics;
 using Scriptable_Objects_Definitions.Voice.Harmony;
 using Scriptable_Objects_Definitions.Voice.Rhythm;
 using UnityEngine;
@@ -16,6 +16,7 @@ namespace Audio {
     
     public string deviceName;
     public RhythmProvider rhythmProvider;
+    public DynamicsProvider dynamicsProvider;
     public HarmonyProvider harmonyProvider;
     public MusicVoiceFilter[] musicVoiceFilters;
     
@@ -40,7 +41,7 @@ namespace Audio {
 
     private Task PlayNote() {
       if (Voice.PhraseAlreadyPlayed) {
-        Voice.AddMusicPhrase(GeneratedPhrase());
+        AddMusicPhrase();
       }
 
       musicVoiceFilters.ToList().ForEach(filter => filter.Filter(this));
@@ -48,21 +49,14 @@ namespace Audio {
       return _midiSender.PlayNoteAsync(Voice.UseNextNote());
     }
     
-    //todo to refactor
-    private IEnumerable<Note> GeneratedPhrase() {
+    private void AddMusicPhrase() {
       _gameOfLifeHolder.UpdateCellularAutomata();
 
       Voice.RhythmPattern = rhythmProvider.Provide(this);
       Voice.HarmonyPattern = harmonyProvider.Provide(this);
+      Voice.DynamicsPattern = dynamicsProvider.Provide(this);
 
-      return Voice.RhythmPattern.Select(rhythmData => NoteFrom(rhythmData, Voice.HarmonyPattern));
-    }
-
-    //todo to be moved (or deleted?)
-    private Note NoteFrom(RhythmData rhythmData, Queue<int> harmony) {
-      return rhythmData.IsPause
-        ? Note.Pause(rhythmData.LengthMillis, 0.0f)
-        : Note.Of(harmony.Dequeue() + Voice.NoteRange.Offset, rhythmData.LengthMillis, 0.0f);
+      Voice.AddMusicPhrase();
     }
   }
 }

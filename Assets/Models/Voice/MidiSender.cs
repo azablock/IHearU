@@ -8,7 +8,7 @@ namespace Models.Voice {
 
     private readonly MidiOut _midiOut;
 
-    private const float StopNoteMillisDelta = 10.0f;
+    private const float StopNoteMillisDelta = 20.0f;
 
     public MidiSender(string deviceName) {
       _midiOut = MidiDeviceFinder.MidiOutByDeviceName(deviceName);
