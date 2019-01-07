@@ -17,7 +17,7 @@ namespace Player {
 // Escape Key: Escapes the mouse lock
 // Mouse click after pressing escape will lock the mouse again
 
-    private float speed = 3.0f;
+    private float speed = 4.0f;
     private float m_MovX;
     private float m_MovY;
     private Vector3 m_moveHorizontal;
@@ -28,7 +28,7 @@ namespace Player {
     private float m_xRot;
     private Vector3 m_rotation;
     private Vector3 m_cameraRotation;
-    private float m_lookSensitivity = 1.5f;
+    private float m_lookSensitivity = 1.25f;
     private bool m_cursorIsLocked = true;
 
     [Header("The Camera the player looks through")]

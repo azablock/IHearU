@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e8e47b27435485380e0b6ced7b81176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceName: loopMIDI Port
+  deviceName: loopMIDI Alt Voice Port
+  rhythmProvider: {fileID: 11400000, guid: d092d16da04eb894cbe1d78eddad839e, type: 2}
+  dynamicsProvider: {fileID: 11400000, guid: a74a535ffb26ff34f80b99b60d170f47, type: 2}
+  harmonyProvider: {fileID: 11400000, guid: b6ad3da2ce8a6674aa2e226cd625764b, type: 2}
   musicVoiceFilters:
-  - {fileID: 11400000, guid: 5c1fa05372d8ee742baef61b412001f7, type: 2}
-  rhythmProvider: {fileID: 11400000, guid: 8f4be58515f342348a29a6644730ee01, type: 2}
-  harmonyProvider: {fileID: 11400000, guid: ce83d5630e454b14e9e2a0e6a707c9e0, type: 2}
+  - {fileID: 11400000, guid: cb3a2135bc33a914591362fa52bca1e9, type: 2}
 --- !u!114 &493059811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,5 +62,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be96ca9dabef461b9664ea203b7e5320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SizeX: 16
-  SizeY: 16
+  SizeX: 8
+  SizeY: 8
